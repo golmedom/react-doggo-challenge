@@ -1,50 +1,22 @@
-# React + TypeScript + Vite
+# Dogs Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Dogs Challenge!
 
-Currently, two official plugins are available:
+We have a small react application that fetches a list of dog breeds and subbreeds.
+It renders them in a list, and lets the user click one to display some random pictures of the dog.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## The Task
 
-## Expanding the ESLint configuration
+Our PM isn't very happy with the UX of the app and has asked that you implement an autocomplete/typehead so that is easier for the users to find the dog breed they are looking for.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- As a user, I want to be able to click on my choice from a list of suggestions that match what I've typed so far.
+- As a user, I want to be able to hit 'Enter' to select the suggestion.
+- As a user, I want to be able to navigate the suggestions using arrow keys.
 
-- Configure the top-level `parserOptions` property like this:
+You've heard that we will need similar functionality in another part of the application, so this component should be reusable.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+She's also not pleased with the way images are rendered on the screen. They are all different sizes, and it would be much nicer if they uniformly arranged in a grid.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Resources
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+[The API](https://dog.ceo/dog-api/)

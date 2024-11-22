@@ -1,30 +1,37 @@
 import { useEffect, useState } from "react";
+import { SelectedBreed } from "./SelectedBreed";
+import { IBreed } from "./types";
 
-const foobar = (id, breed, subBreed) => {
+const foobar = (id: number, breed: string, subBreed?: string) => {
   const label = subBreed ? `${subBreed} ${breed}` : breed;
   return { id, label, resource: { breed, subBreed } };
 };
 
 export const Breeds = () => {
-  const [breeds, setBreeds] = useState([]);
-  const [selectedBreed, setSelectedBreed] = useState(null);
+  const [breeds, setBreeds] = useState<IBreed[]>([]);
+  const [selectedBreed, setSelectedBreed] = useState<IBreed | null>(null);
 
   async function loadBreeds() {
     fetch("https://dog.ceo/api/breeds/list/all")
       .then((res) => res.json())
       .then((json) => {
-        const { message } = json;
+        const message: Record<string, string[]> = json.message;
         let counter = 0;
-        const breeds = Object.entries(message).reduce(
+
+        const breeds = Object.entries(message).reduce<IBreed[]>(
           (acc, [breed, subBreeds]) => {
-            acc.push(foobar(counter++, breed));
+            const currentBreed = foobar(counter++, breed);
+            acc.push(currentBreed);
             acc.concat(
-              subBreeds.map((subBreed) => foobar(counter++, breed, subBreed))
+              subBreeds.map((subBreed: string) =>
+                foobar(counter++, breed, subBreed)
+              )
             );
             return acc;
           },
           []
         );
+
         setBreeds(breeds);
       });
   }
@@ -52,6 +59,7 @@ export const Breeds = () => {
       <p>Breeds</p>
       <button onClick={reset}>reset</button>
       {page}
+      {selectedBreed && <SelectedBreed selectedBreed={selectedBreed} />}
     </div>
   );
 };
