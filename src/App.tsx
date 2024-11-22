@@ -9,6 +9,7 @@ function App() {
           <span role="img" aria-label="dog"></span>
         </p>
       </header>
+      <Breeds />
     </div>
   );
 }
